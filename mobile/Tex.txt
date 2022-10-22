@@ -1,0 +1,1 @@
+para usar no desktop precisa rever a unit que permite acesso a camera e a library
