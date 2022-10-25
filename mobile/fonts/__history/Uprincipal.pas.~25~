@@ -1,0 +1,216 @@
+unit Uprincipal;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
+  FMX.Controls.Presentation, FMX.Edit, FMX.Objects, FMX.Layouts, FMX.StdCtrls,
+  FMX.TabControl, System.Actions, FMX.ActnList, u99Permissions,
+  FMX.MediaLibrary.Actions, FMX.StdActns;
+
+type
+  Tfrm_login = class(TForm)
+    Layout_login: TLayout;
+    img_logo: TImage;
+    Layout_senha: TLayout;
+    Round_senha: TRoundRect;
+    edt_senha: TEdit;
+    StyleBook1: TStyleBook;
+    Layout_email: TLayout;
+    Round_email: TRoundRect;
+    edt_email: TEdit;
+    Layout_acessar: TLayout;
+    Label1: TLabel;
+    Tab_control: TTabControl;
+    tab_Login: TTabItem;
+    tab_Criar_conta: TTabItem;
+    Round_acessar: TRoundRect;
+    Layout_conta: TLayout;
+    img_contaLogo: TImage;
+    Layout_contaSenha: TLayout;
+    round_contaSenha: TRoundRect;
+    edt_contaSenha: TEdit;
+    Layout_contaEmail: TLayout;
+    round_emailConta: TRoundRect;
+    edt_contaEmail: TEdit;
+    Layout_contaProximo: TLayout;
+    Round_contaProximo: TRoundRect;
+    lb_conta_proximo: TLabel;
+    Layout_contaConfirma: TLayout;
+    Round_senhaConfirma: TRoundRect;
+    edt_senhaConfirma: TEdit;
+    Layout_contaNome: TLayout;
+    Round_conta_nome: TRoundRect;
+    edt_conta_nome: TEdit;
+    Tab_foto: TTabItem;
+    Layout_foto: TLayout;
+    Circulo_Transparente: TCircle;
+    lb_tirafoto: TLabel;
+    Layout_circle: TLayout;
+    Tab_escolhafoto: TTabItem;
+    Layout_fotoCriarconta: TLayout;
+    Round_criarConta: TRoundRect;
+    lb_criar_conta: TLabel;
+    Layout_escolha: TLayout;
+    lb_escolha: TLabel;
+    img_cam: TImage;
+    img_gallery: TImage;
+    Layout_imgs: TLayout;
+    Layout_tabsdeconta: TLayout;
+    lb_Login: TLabel;
+    lb_Criarconta: TLabel;
+    ActionList1: TActionList;
+    act_conta: TChangeTabAction;
+    act_login: TChangeTabAction;
+    act_foto: TChangeTabAction;
+    act_escolher: TChangeTabAction;
+    Layout_criarConta: TLayout;
+    lbc_login: TLabel;
+    lbc_criarconta: TLabel;
+    lb_erroCriarconta: TLabel;
+    Layout_back: TLayout;
+    img_voltarEscolherfoto: TImage;
+    act_library: TTakePhotoFromLibraryAction;
+    act_camera: TTakePhotoFromCameraAction;
+    Layout_escolherFoto: TLayout;
+    img_back_escolhefoto: TImage;
+    procedure lb_CriarcontaClick(Sender: TObject);
+    procedure lbc_loginClick(Sender: TObject);
+    procedure Round_contaProximoClick(Sender: TObject);
+    procedure Circulo_TransparenteClick(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure img_camClick(Sender: TObject);
+    procedure img_galleryClick(Sender: TObject);
+    procedure img_back_escolhefotoClick(Sender: TObject);
+    procedure FormShow(Sender: TObject);
+    procedure act_libraryDidFinishTaking(Image: TBitmap);
+    procedure act_cameraDidFinishTaking(Image: TBitmap);
+    procedure Layout_contaEmailClick(Sender: TObject);
+    procedure round_emailContaClick(Sender: TObject);
+    procedure Layout_criarContaClick(Sender: TObject);
+    procedure Layout_fotoCriarcontaClick(Sender: TObject);
+
+
+  private
+    { Private declarations }
+    permissao: T99Permissions;
+    procedure TrataErroPermissao(Sender: TObject);
+  public
+    { Public declarations }
+  end;
+
+var
+  frm_login: Tfrm_login;
+
+implementation
+
+{$R *.fmx}
+
+     procedure Tfrm_login.TrataErroPermissao(Sender: TObject);
+     begin
+       showmessage('Você não possui permissão de acesso para esse recurso');
+     end;
+
+
+procedure Tfrm_login.act_cameraDidFinishTaking(Image: TBitmap);
+begin
+   circulo_transparente.Fill.Bitmap.Bitmap := image;
+   act_foto.Execute;
+end;
+
+procedure Tfrm_login.act_libraryDidFinishTaking(Image: TBitmap);
+begin
+   circulo_transparente.Fill.Bitmap.Bitmap := image;
+   act_foto.Execute;
+end;
+
+procedure Tfrm_login.Circulo_TransparenteClick(Sender: TObject);
+begin
+                        act_escolher.Execute;
+end;
+
+pprocedure Tfrm_login.conta_emailClick(Sender: TObject);
+begin
+
+end;
+
+rocedure Tfrm_login.FormCreate(Sender: TObject);
+begin
+  permissao := T99Permissions.Create;
+end;
+
+procedure Tfrm_login.FormDestroy(Sender: TObject);
+begin
+permissao.DisposeOf;
+end;
+
+procedure Tfrm_login.FormShow(Sender: TObject);
+begin
+           act_login.Execute;
+
+end;
+
+procedure Tfrm_login.img_back_escolhefotoClick(Sender: TObject);
+begin
+       act_foto.Execute;
+end;
+
+procedure Tfrm_login.img_camClick(Sender: TObject);
+begin
+   permissao.Camera(act_Camera,TrataErroPermissao)
+end;
+
+procedure Tfrm_login.img_galleryClick(Sender: TObject);
+begin
+  permissao.PhotoLibrary(act_library,TrataErroPermissao);
+end;
+
+pprocedure Tfrm_login.Layout_criarContaClick(Sender: TObject);
+begin
+
+end;
+
+rocedure Tfrm_login.lbc_loginClick(Sender: TObject);
+begin
+            act_login.Execute;
+              lb_erro_criarconta.Visible := false;
+
+end;
+
+procedure Tfrm_login.lb_CriarcontaClick(Sender: TObject);
+begin
+            act_conta.Execute;
+end;
+
+procedure Tfrm_login.Round_contaProximoClick(Sender: TObject);
+begin
+//verifica as caixaas
+  if (edt_conta_nome.Text <> '') and (edt_conta_email.Text <> '') and
+     (edt_conta_senha.text = edt_conta_confirma_senha.text)
+
+     then
+      begin
+       lb_erro_criarconta.visible := false;
+       act_foto.Execute
+      end
+     else
+      begin
+        lb_erro_criarconta.visible := true;
+      end;
+
+
+end;
+
+eprocedure Tfrm_login.round_email_contaClick(Sender: TObject);
+begin
+
+eprocedure Tfrm_login.Layout_fotoCriarcontaClick(Sender: TObject);
+begin
+
+end;
+
+nd;
+
+nd.
