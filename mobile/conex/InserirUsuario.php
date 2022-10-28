@@ -7,7 +7,7 @@ if (!empty($_POST)) {
       $sql = "INSERT INTO usuario
                 (nome, email, senha, celular,id_tipo_usuario)
               VALUES
-                (:nome, :email, :senha, '',1)";
+                (:nome, :email, :senha, '',4)";
 
       $stmt = $pdo->prepare($sql);
 

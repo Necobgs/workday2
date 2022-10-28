@@ -20,7 +20,7 @@ type
     Round_email: TRoundRect;
     edt_email: TEdit;
     Layout_acessar: TLayout;
-    Label1: TLabel;
+    lb_acessar: TLabel;
     Tab_control: TTabControl;
     tab_Login: TTabItem;
     tab_Criar_conta: TTabItem;
@@ -37,8 +37,6 @@ type
     Round_contaProximo: TRoundRect;
     lb_conta_criar: TLabel;
     Layout_contaConfirma: TLayout;
-    Round_senhaConfirma: TRoundRect;
-    edt_senhaConfirma: TEdit;
     Layout_contaNome: TLayout;
     Round_conta_nome: TRoundRect;
     edt_contaNome: TEdit;
@@ -55,14 +53,19 @@ type
     lbc_criarconta: TLabel;
     lbc_login: TLabel;
     IdHTTP1: TIdHTTP;
-    Memo1: TMemo;
     Layout1: TLayout;
-    Label2: TLabel;
+    lb_esqueciSenha: TLabel;
+    lb_erroLogin: TLabel;
+    img_olhoAberto: TImage;
+    img_olhoFechado: TImage;
+    Round_senhaConfirma: TRoundRect;
+    edt_senhaConfirma: TEdit;
     procedure lb_CriarcontaClick(Sender: TObject);
     procedure lbc_loginClick(Sender: TObject);
     procedure Round_contaProximoClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Round_acessarClick(Sender: TObject);
+    procedure img_olhoAbertoClick(Sender: TObject);
 
 
 
@@ -78,6 +81,8 @@ var
 implementation
 {$R *.fmx}
 
+uses Uhome;
+
 
 
      procedure Tfrm_login.TrataErroPermissao(Sender: TObject);
@@ -88,6 +93,27 @@ implementation
 procedure Tfrm_login.FormShow(Sender: TObject);
 begin
            act_login.Execute;
+end;
+
+procedure Tfrm_login.img_olhoAbertoClick(Sender: TObject);
+begin
+
+if (img_olhoFechado.Visible = true) and (tab_criar_conta.Enabled = true) then
+begin
+    edt_senha.Password := false;
+    img_olhoAberto.Visible := true;
+    img_olhoFechado.Visible := false;
+end
+ else
+  begin
+   edt_senha.Password := true;
+   img_olhoAberto.Visible := false;
+   img_olhoFechado.Visible := true;
+end;
+
+
+
+
 end;
 
 procedure Tfrm_login.lbc_loginClick(Sender: TObject);
@@ -106,6 +132,7 @@ procedure Tfrm_login.Round_acessarClick(Sender: TObject);
 var
 //Lista de string que recebe os dados
 jsonToSend: Tstringlist;
+logado : string;
 
 begin
 //criando a lista e adicionando os valores no tipo key=value
@@ -113,15 +140,23 @@ jsontosend := tstringlist.Create;
 jsonToSend.Add('email=' + edt_email.Text);
 jsonToSend.Add('senha=' + edt_senha.Text);
 //postado e execultando o codigo no arquivo .php
-memo1.Lines.Text := idhttp1.post('http://localhost/conex/SelecionarUsuario.php', jsonToSend);
-
+logado := idhttp1.post('http://localhost/3-54/mobile/conex/SelecionarUsuario.php', jsonToSend);
+ if logado = 'ON' then
+ begin
+    lb_erroLogin.Visible := false;
+      Application.MainForm := frm_home;
+      frm_login.close;
+      frm_home.Show;
+ end
+ else
+ lb_erroLogin.Visible := true;
 end;
 
 procedure Tfrm_login.Round_contaProximoClick(Sender: TObject);
 var
 //Lista de string que recebe os dados
 jsonToSendContaNova: Tstringlist;
-
+contaCriada: string;
 begin
 //verifica as caixaas
   if (edt_contaNome.Text <> '') and (edt_contaEmail.Text <> '') and
@@ -135,7 +170,11 @@ begin
            jsonToSendContaNova.Add('senha=' + edt_Contasenha.Text);
            jsonToSendContaNova.Add('nome=' + edt_ContaNome.Text);
            //postado e execultando o codigo no arquivo .php
-            memo1.Lines.Text := idhttp1.post('http://localhost/conex/InserirUsuario.php', jsonToSendContaNova);
+            contaCriada:= idhttp1.post('http://localhost/3-54/mobile/conex/InserirUsuario.php', jsonToSendContaNova);
+            if contaCriada = 'ON' then
+            begin
+
+            end;
 
       end
      else
