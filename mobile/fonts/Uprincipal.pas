@@ -61,11 +61,11 @@ type
     Round_senhaConfirma: TRoundRect;
     edt_senhaConfirma: TEdit;
     procedure lb_CriarcontaClick(Sender: TObject);
-    procedure lbc_loginClick(Sender: TObject);
     procedure Round_contaProximoClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
     procedure Round_acessarClick(Sender: TObject);
     procedure img_olhoAbertoClick(Sender: TObject);
+    procedure lbc_loginClick(Sender: TObject);
 
 
 
@@ -116,14 +116,17 @@ end;
 
 end;
 
+
 procedure Tfrm_login.lbc_loginClick(Sender: TObject);
 begin
-            act_login.Execute;
-              lb_erroCriarconta.Visible := false;
+   act_login.Execute;
+   lb_erroCriarConta.Visible := false;
 end;
+
 procedure Tfrm_login.lb_CriarcontaClick(Sender: TObject);
 begin
-            act_conta.Execute;
+               act_conta.Execute;
+              lb_erroCriarconta.Visible := false;
 end;
 
 
@@ -141,6 +144,10 @@ jsonToSend.Add('email=' + edt_email.Text);
 jsonToSend.Add('senha=' + edt_senha.Text);
 //postado e execultando o codigo no arquivo .php
 logado := idhttp1.post('http://localhost/3-54/mobile/conex/SelecionarUsuario.php', jsonToSend);
+Nome_usuario := idhttp1.post('http://localhost/3-54/mobile/conex/Nome_Usuario.php', jsonToSend);
+Email_usuario := idhttp1.post('http://localhost/3-54/mobile/conex/Email_Usuario.php', jsonToSend);
+id_tipo_usuario := idhttp1.post('http://localhost/3-54/mobile/conex/Id_Tipo_Usuario.php', jsonToSend);
+id_usuario := idhttp1.post('http://localhost/3-54/mobile/conex/Id_Usuario.php', jsonToSend);
  if logado = 'ON' then
  begin
     lb_erroLogin.Visible := false;
@@ -171,10 +178,14 @@ begin
            jsonToSendContaNova.Add('nome=' + edt_ContaNome.Text);
            //postado e execultando o codigo no arquivo .php
             contaCriada:= idhttp1.post('http://localhost/3-54/mobile/conex/InserirUsuario.php', jsonToSendContaNova);
+
             if contaCriada = 'ON' then
             begin
-
-            end;
+               act_login.Execute;
+               lb_erroCriarconta.Visible := false;
+            end
+            else
+            lb_erroCriarConta.Visible := true;
 
       end
      else

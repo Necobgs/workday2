@@ -32,7 +32,7 @@ $username = 'root';
 
 if (isset($_POST['enviar'])){
 
-try {
+try {   
     //Server settings
     $mail->SMTPDebug = SMTP::DEBUG_SERVER;                     
     $mail->isSMTP();                                          
