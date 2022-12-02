@@ -1,5 +1,4 @@
 program Project1;
-
 uses
   System.StartUpCopy,
   FMX.Forms,
@@ -8,7 +7,6 @@ uses
   Uhome in 'Uhome.pas' {frm_home};
 
 {$R *.res}
-
 begin
   Application.Initialize;
   Application.CreateForm(Tfrm_login, frm_login);

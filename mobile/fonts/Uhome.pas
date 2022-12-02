@@ -19,14 +19,14 @@ type
     Image2: TImage;
     Image3: TImage;
     Rectangle_criarReporte: TRectangle;
-    Rectangle_mapaEscolar: TRectangle;
+    Rectangle_cadastrar: TRectangle;
     Rectangle_verConcluidos: TRectangle;
-    Image4: TImage;
+    Image_cadastrar: TImage;
     Image5: TImage;
     Image6: TImage;
     lb_reportarProblema: TLabel;
     lb_concluidos: TLabel;
-    lb_mapaEscolar: TLabel;
+    lb_cadastrar: TLabel;
     linha_Bottom: TLine;
     Linha_top: TLine;
     IdHTTP1: TIdHTTP;
@@ -73,10 +73,20 @@ implementation
 
 procedure Tfrm_home.FormShow(Sender: TObject);
 var
-empty : tstringlist;
+empt : tstringlist;
 begin
+empt := tstringlist.Create;
+empt.Add('');
  lb_nomeUsuario.Text := lb_nomeUsuario.Text + nome_usuario;
- cb_lugar.Items.Text := idhttp1.post('http://localhost/3-54/mobile/conex/Lugar.php', empty);
+ cb_lugar.Items.Text := idhttp1.post('http://localhost/3-54/mobile/conex/Lugar.php', empt);
+
+ if StrToInt(id_tipo_usuario) >= 3 then
+ begin
+    rectangle_Cadastrar.Visible := false;
+    lb_Cadastrar.Visible := false;
+    image_cadastrar.Visible := false;
+ end;
+
 end;
 
 procedure Tfrm_home.Image7Click(Sender: TObject);

@@ -71,8 +71,6 @@ type
 
   private
     { Private declarations }
-    permissao: T99Permissions;
-    procedure TrataErroPermissao(Sender: TObject);
   public
     { Public declarations }
   end;
@@ -85,10 +83,6 @@ uses Uhome;
 
 
 
-     procedure Tfrm_login.TrataErroPermissao(Sender: TObject);
-     begin
-       showmessage('Você não possui permissão de acesso para esse recurso');
-     end;
 
 procedure Tfrm_login.FormShow(Sender: TObject);
 begin
@@ -135,7 +129,7 @@ procedure Tfrm_login.Round_acessarClick(Sender: TObject);
 var
 //Lista de string que recebe os dados
 jsonToSend: Tstringlist;
-logado : string;
+logado : String;
 
 begin
 //criando a lista e adicionando os valores no tipo key=value
