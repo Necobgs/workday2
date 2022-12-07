@@ -1,0 +1,103 @@
+object form_mensagem: Tform_mensagem
+  Left = 0
+  Top = 0
+  Caption = 'Mensagem'
+  ClientHeight = 194
+  ClientWidth = 533
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Layout2: TLayout
+    Align = Center
+    Size.Width = 485.000000000000000000
+    Size.Height = 153.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object Label1: TLabel
+      Align = Top
+      StyledSettings = [Family, FontColor]
+      Size.Width = 485.000000000000000000
+      Size.Height = 49.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 36.000000000000000000
+      TextSettings.Font.StyleExt = {00060000000000000004000000}
+      TextSettings.HorzAlign = Center
+      Text = 'Confirmar reporte?'
+      TabOrder = 0
+    end
+    object Layout1: TLayout
+      Align = Left
+      Margins.Left = 30.000000000000000000
+      Margins.Right = 30.000000000000000000
+      Margins.Bottom = 20.000000000000000000
+      Position.X = 30.000000000000000000
+      Position.Y = 49.000000000000000000
+      Size.Width = 107.000000000000000000
+      Size.Height = 84.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 6
+      object round_concluirReporte: TRoundRect
+        Align = Contents
+        Fill.Color = xFF0A0A94
+        Opacity = 0.899999976158142100
+        Margins.Top = 25.000000000000000000
+        Size.Width = 107.000000000000000000
+        Size.Height = 59.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+      end
+      object lb_sim: TLabel
+        Align = Center
+        StyledSettings = [Family]
+        Margins.Top = 25.000000000000000000
+        Size.Width = 109.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 26.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.FontColor = claWhite
+        TextSettings.HorzAlign = Center
+        Text = 'Sim'
+        TabOrder = 1
+      end
+    end
+    object Layout3: TLayout
+      Align = Right
+      Margins.Left = 30.000000000000000000
+      Margins.Right = 30.000000000000000000
+      Margins.Bottom = 20.000000000000000000
+      Position.X = 348.000000000000000000
+      Position.Y = 49.000000000000000000
+      Size.Width = 107.000000000000000000
+      Size.Height = 84.000000000000000000
+      Size.PlatformDefault = False
+      TabOrder = 5
+      object RoundRect1: TRoundRect
+        Align = Contents
+        Fill.Color = xFF0A0A94
+        Opacity = 0.899999976158142100
+        Margins.Top = 25.000000000000000000
+        Size.Width = 107.000000000000000000
+        Size.Height = 59.000000000000000000
+        Size.PlatformDefault = False
+        Stroke.Kind = None
+        OnClick = RoundRect1Click
+      end
+      object lb_nao: TLabel
+        Align = Center
+        StyledSettings = [Family]
+        Margins.Top = 25.000000000000000000
+        Size.Width = 109.000000000000000000
+        Size.Height = 25.000000000000000000
+        Size.PlatformDefault = False
+        TextSettings.Font.Size = 26.000000000000000000
+        TextSettings.Font.StyleExt = {00060000000000000004000000}
+        TextSettings.FontColor = claWhite
+        TextSettings.HorzAlign = Center
+        Text = 'N'#227'o'
+        TabOrder = 1
+      end
+    end
+  end
+end

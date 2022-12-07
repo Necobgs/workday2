@@ -1,0 +1,48 @@
+object frameReporte: TframeReporte
+  Size.Width = 587.000000000000000000
+  Size.Height = 132.000000000000000000
+  Size.PlatformDefault = False
+  object Layout1: TLayout
+    Align = Client
+    Size.Width = 587.000000000000000000
+    Size.Height = 132.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object lb_problema: TLabel
+      Align = Left
+      StyledSettings = [Family, FontColor]
+      Size.Width = 120.000000000000000000
+      Size.Height = 132.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 20.000000000000000000
+      TextSettings.Font.StyleExt = {00060000000000000004000000}
+      TextSettings.HorzAlign = Center
+      Text = 'Problema'
+      TabOrder = 2
+    end
+    object lb_local: TLabel
+      Align = Center
+      StyledSettings = [Family, FontColor]
+      Margins.Right = 10.000000000000000000
+      Size.Width = 200.000000000000000000
+      Size.Height = 103.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 20.000000000000000000
+      Text = 'Local:'
+      TabOrder = 1
+    end
+    object lb_Data: TLabel
+      Align = Right
+      StyledSettings = [Family, FontColor]
+      Margins.Right = 10.000000000000000000
+      Position.X = 457.000000000000000000
+      Size.Width = 120.000000000000000000
+      Size.Height = 132.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 20.000000000000000000
+      TextSettings.HorzAlign = Center
+      Text = 'Data reporte'
+      TabOrder = 0
+    end
+  end
+end

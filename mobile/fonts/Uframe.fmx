@@ -1,0 +1,56 @@
+object frame_registro: Tframe_registro
+  Left = 0
+  Top = 0
+  BorderStyle = None
+  ClientHeight = 103
+  ClientWidth = 605
+  Fill.Color = xFFEAE8E8
+  Fill.Kind = Solid
+  FormFactor.Width = 320
+  FormFactor.Height = 480
+  FormFactor.Devices = [Desktop]
+  DesignerMasterStyle = 0
+  object Layout1: TLayout
+    Align = Client
+    Size.Width = 605.000000000000000000
+    Size.Height = 103.000000000000000000
+    Size.PlatformDefault = False
+    TabOrder = 0
+    object lb_problema: TLabel
+      Align = Left
+      StyledSettings = [Family, FontColor]
+      Size.Width = 120.000000000000000000
+      Size.Height = 103.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 20.000000000000000000
+      TextSettings.Font.StyleExt = {00060000000000000004000000}
+      TextSettings.HorzAlign = Center
+      Text = 'Problema'
+      TabOrder = 2
+    end
+    object lb_local: TLabel
+      Align = Center
+      StyledSettings = [Family, FontColor]
+      Margins.Right = 10.000000000000000000
+      Size.Width = 200.000000000000000000
+      Size.Height = 103.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 20.000000000000000000
+      Text = 'Local:'
+      TabOrder = 1
+    end
+    object Label1: TLabel
+      Align = Right
+      StyledSettings = [Family, FontColor]
+      Margins.Right = 10.000000000000000000
+      Position.X = 475.000000000000000000
+      Size.Width = 120.000000000000000000
+      Size.Height = 103.000000000000000000
+      Size.PlatformDefault = False
+      TextSettings.Font.Size = 20.000000000000000000
+      TextSettings.HorzAlign = Center
+      Text = 'Data reporte'
+      TabOrder = 0
+    end
+  end
+end

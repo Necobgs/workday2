@@ -7,7 +7,8 @@ uses
   FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs, FMX.Layouts,
   FMX.Objects, FMX.Controls.Presentation, FMX.StdCtrls, IdBaseComponent,
   IdComponent, IdTCPConnection, IdTCPClient, IdHTTP, FMX.TabControl,
-  System.Actions, FMX.ActnList, FMX.ListBox, FMX.Edit;
+  System.Actions, FMX.ActnList, FMX.ListBox, FMX.Edit, FMX.Memo.Types,
+  FMX.ScrollBox, FMX.Memo;
 
 type
   Tfrm_home = class(TForm)
@@ -45,13 +46,29 @@ type
     Round_lugar: TRoundRect;
     Layout_reportDesricao: TLayout;
     Round_descricao: TRoundRect;
-    edt_descricao: TEdit;
+    edt_problema: TEdit;
     Cb_Lugar: TComboBox;
     lb_lugar: TLabel;
-    lb_nomeUsuario: TLabel;
+    Layout1: TLayout;
+    RoundRect1: TRoundRect;
+    edt_descricao: TEdit;
+    Image4: TImage;
+    Layout2: TLayout;
+    round_concluirReporte: TRoundRect;
+    Label1: TLabel;
+    act_visualizar: TChangeTabAction;
+    tab_visualizar: TTabItem;
+    Layout3: TLayout;
+    VertScrollBox1: TVertScrollBox;
+    refresh: TImage;
     procedure Image7Click(Sender: TObject);
     procedure Rectangle_criarReporteClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure ConfirmaReporte;
+    procedure round_concluirReporteClick(Sender: TObject);
+    procedure Rectangle_verConcluidosClick(Sender: TObject);
+    procedure refreshClick(Sender: TObject);
+    procedure addReporte(problema,local,data:string);
 
 
 
@@ -70,15 +87,67 @@ implementation
 
 {$R *.fmx}
 
+uses Umensagem, UmensagemSucesso, Uframe, frameReportes;
+
+
+
+procedure Tfrm_home.addReporte(problema, local, data: string);
+var
+frame :TframeReporte;
+begin
+frame := tframeReporte.Create(nil);
+frame.align := talignLayout.Top;
+
+VertScrollBox1.AddObject(frame);
+
+end;
+
+procedure Tfrm_home.ConfirmaReporte;
+var
+items: tstringlist;
+begin
+items := tstringlist.Create;
+items.Add('problema='+edt_problema.Text);
+items.Add('lugar='+cb_lugar.Items.Strings[cb_lugar.ItemIndex]);
+items.Add('descricao='+edt_descricao.Text);
+items.Add('id_usuario='+id_usuario);
+if (cb_lugar.Items.Strings[cb_lugar.ItemIndex] <> '') and (edt_problema.Text <> '') and (edt_descricao.Text <> '') then
+begin
+  if idhttp1.Post('http://localhost/3-54/mobile/conex/adicionaReporte.php',items) = 'ON' then
+  begin
+  edt_problema.Text := '';
+  cb_lugar.ItemIndex := -1;
+  edt_descricao.Text := '';
+   form_mensagem.close;
+   frm_sucesso.Show;
+  end
+  else showmessage('Ocorreu um erro inesperado');
+  end
+else
+begin
+  showmessage('Favor preencher os campos corretamente!');
+end;
+
+end;
 
 procedure Tfrm_home.FormShow(Sender: TObject);
 var
-empt : tstringlist;
+num : tstringlist;
+Linhas,i : integer;
 begin
-empt := tstringlist.Create;
-empt.Add('');
- lb_nomeUsuario.Text := lb_nomeUsuario.Text + nome_usuario;
- cb_lugar.Items.Text := idhttp1.post('http://localhost/3-54/mobile/conex/Lugar.php', empt);
+act_home.Execute;
+i:=0;
+Linhas := StrToInt(idhttp1.Get('http://localhost/3-54/mobile/conex/linhasLugar.php'));
+num := tstringlist.Create;
+while i <  Linhas do
+ begin
+    num.Clear;
+    num.Add('num='+ IntToStr(i));
+    cb_lugar.Items.Add(idhttp1.Post('http://localhost/3-54/mobile/conex/Lugar.php',num));
+    i := i + 1;
+ end;
+
+
 
  if StrToInt(id_tipo_usuario) >= 3 then
  begin
@@ -92,11 +161,37 @@ end;
 procedure Tfrm_home.Image7Click(Sender: TObject);
 begin
  act_home.Execute;
+  edt_problema.Text := '';
+  cb_lugar.ItemIndex := -1;
+  edt_descricao.Text := '';
 end;
 
 procedure Tfrm_home.Rectangle_criarReporteClick(Sender: TObject);
 begin
 act_reports.Execute;
+end;
+
+procedure Tfrm_home.Rectangle_verConcluidosClick(Sender: TObject);
+begin
+act_visualizar.Execute;
+end;
+
+procedure Tfrm_home.refreshClick(Sender: TObject);
+var
+i ,linhas: integer;
+num :tstringlist;
+problema,local,data: string;
+lista: tstringlist;
+begin
+lista := tstringlist.Create;
+lista.Add('tpUsu='+id_tipo_usuario);
+
+
+end;
+
+procedure Tfrm_home.round_concluirReporteClick(Sender: TObject);
+begin
+form_mensagem.Show;
 end;
 
 end.

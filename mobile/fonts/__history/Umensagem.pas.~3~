@@ -1,0 +1,47 @@
+unit Umensagem;
+
+interface
+
+uses
+  System.SysUtils, System.Types, System.UITypes, System.Classes, System.Variants,
+  FMX.Types, FMX.Controls, FMX.Forms, FMX.Graphics, FMX.Dialogs,
+  FMX.Controls.Presentation, FMX.StdCtrls, FMX.Layouts, FMX.Objects;
+
+type
+  Tform_mensagem = class(TForm)
+    Layout2: TLayout;
+    Label1: TLabel;
+    Layout1: TLayout;
+    round_concluirReporte: TRoundRect;
+    lb_sim: TLabel;
+    Layout3: TLayout;
+    RoundRect1: TRoundRect;
+    lb_nao: TLabel;
+    procedure RoundRect1Click(Sender: TObject);
+    procedure round_concluirReporteClick(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  form_mensagem: Tform_mensagem;
+
+implementation
+
+{$R *.fmx}
+
+uses Uhome;
+
+procedure Tform_mensagem.RoundRect1Click(Sender: TObject);
+begin
+ form_mensagem.Close;
+end;
+
+procedure Tform_mensagem.round_concluirReporteClick(Sender: TObject);
+begin
+ frm_home.ConfirmaReporte();
+end;
+
+end.
